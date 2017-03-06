@@ -1,29 +1,29 @@
 (function(){
     'use strict';
-angular.module('ShoppingListApp', [])
-.controller('BuyController', BuyController)
-.controller('BoughtController', BoughtController)
-.service('ListService', ListService);
+angular.module('ShoppingListCheckoff', [])
+.controller('ToBuyController', BuyController)
+.controller('AlreadyBoughtController', BoughtController)
+.service('ShoppingListCheckOffService', ShoppingListCheckOffService);
 
-BuyController.$inject=['ListService'];
+BuyController.$inject=['ShoppingListCheckOffService'];
 
-function BuyController(ListService){
+function BuyController(ShoppingListCheckOffService){
     var toBuy = this;
-    toBuy.items = ListService.getBuyList();
+    toBuy.items = ShoppingListCheckOffService.getBuyList();
 
     toBuy.checkItem = function(itemIndex){
-    ListService.checkItem(itemIndex);
+    ShoppingListCheckOffService.checkItem(itemIndex);
     }; 
 
 } 
 
-BoughtController.$inject=['ListService'];
-function BoughtController(ListService){
+BoughtController.$inject=['ShoppingListCheckOffService'];
+function BoughtController(ShoppingListCheckOffService){
     var doneBought = this;
-    doneBought.items = ListService.getDoneList();
+    doneBought.items = ShoppingListCheckOffService.getDoneList();
 }
 
-function ListService(){
+function ShoppingListCheckOffService(){
     var service = this;
     var buyList = [
         {name: 'cookies', quantity: 10},
